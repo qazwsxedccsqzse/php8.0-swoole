@@ -23,7 +23,6 @@ php8.0-zip \
 php8.0-dom && \
 printf "\n" | pecl install swoole && \
 echo "extension=swoole.so" >> /etc/php/8.0/cli/php.ini && \
-cd /root && rm -rf swoole-src-4.6.7 && \
 php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php && \
 php composer-setup.php && \
 php -r "unlink('composer-setup.php');" && \

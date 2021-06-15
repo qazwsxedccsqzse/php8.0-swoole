@@ -1,10 +1,11 @@
 FROM phusion/baseimage:focal-1.0.0alpha1-amd64
 CMD ["/sbin/my_init"]
-RUN apt-get update && apt-get install -y software-properties-common wget tar make libpcre3 libpcre3-dev openssl libssl-dev openssl libssl-dev supervisor
+RUN apt-get update && apt-get install -y software-properties-common wget tar make libpcre3 libpcre3-dev openssl libssl-dev supervisor
 WORKDIR /root
 RUN LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php && \
 apt-get update && \
-apt-get install -y php8.0-cli \
+apt-get install -y nodejs \
+php8.0-cli \
 php8.0-common \
 php8.0 \
 php8.0-mysql \
@@ -23,6 +24,7 @@ php8.0-bcmath \
 php8.0-zip \
 php8.0-dom && \
 printf "\n" | pecl install swoole && \
+pecl install redis && \
 echo "extension=swoole.so" >> /etc/php/8.0/cli/php.ini && \
 php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php && \
 php composer-setup.php && \
